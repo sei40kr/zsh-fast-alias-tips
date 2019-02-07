@@ -104,7 +104,7 @@ func TestMatchDef(t *testing.T) {
 		expected := mockArg.expected
 		actual := MatchDef(mockDefs, mockArg.command)
 
-		if actual == expected {
+		if actual.alias == expected {
 			fmt.Println("ok")
 		} else {
 			fmt.Println("ng")

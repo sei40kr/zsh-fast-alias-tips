@@ -48,7 +48,7 @@ func ParseDef(line string) Def {
 	return Def{alias: string(alias), abbr: string(abbr)}
 }
 
-func MatchDef(defs []Def, command string) string {
+func MatchDef(defs []Def, command string) *Def {
 	sort.Slice(defs, func(i, j int) bool {
 		return strings.Compare(defs[i].abbr, defs[j].abbr) <= 0
 	})
@@ -66,9 +66,9 @@ func MatchDef(defs []Def, command string) string {
 	}
 
 	if strings.HasPrefix(command, defs[ok].abbr) {
-		return defs[ok].alias
+		return &defs[ok]
 	} else {
-		return ""
+		return nil
 	}
 }
 
@@ -87,5 +87,8 @@ func main() {
 	}
 
 	command := os.Args[1]
-	fmt.Printf("%s\n", MatchDef(defs, command))
+	match := MatchDef(defs, command)
+	if match != nil {
+		fmt.Printf("%s%s\n", match.alias, command[len(match.abbr):])
+	}
 }
