@@ -3,6 +3,9 @@
 A zsh plugin to help remembering those aliases you defined once.
 Ported from [[https://github.com/djui/alias-tips][djui/alias-tips]].
 
+* Requirements
+  - Go 1.11.1 or above
+
 * Install
 
 ** Install with zplugin
