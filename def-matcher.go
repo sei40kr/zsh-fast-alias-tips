@@ -86,5 +86,6 @@ func main() {
 		defs = append(defs, ParseDef(line))
 	}
 
-	fmt.Printf("%s\n", MatchDef(defs, os.Args[1]))
+	command := os.Args[1]
+	fmt.Printf("%s\n", MatchDef(defs, command))
 }
