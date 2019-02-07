@@ -5,6 +5,52 @@ import (
 	"testing"
 )
 
+func TestParseDef(t *testing.T) {
+	mockArgs := []struct {
+		subject  string
+		line     string
+		expected Def
+	}{
+		{
+			subject: "when neither of the alias nor the abbreviation are quoted",
+			line:    "dk=docker",
+			expected: Def{
+				alias: "dk",
+				abbr:  "docker",
+			},
+		},
+		{
+			subject: "when the abbreviation is quoted",
+			line:    "gb='git branch'",
+			expected: Def{
+				alias: "gb",
+				abbr:  "git branch",
+			},
+		},
+		{
+			subject: "when both of the alias and the abbreviation are quoted",
+			line:    "'g cb'='git checkout -b'",
+			expected: Def{
+				alias: "g cb",
+				abbr:  "git checkout -b",
+			},
+		},
+	}
+
+	for _, mockArg := range mockArgs {
+		fmt.Printf("%s - ", mockArg.subject)
+
+		actual := ParseDef(mockArg.line)
+		expected := mockArg.expected
+		if actual == expected {
+			fmt.Println("ok")
+		} else {
+			fmt.Println("ng")
+			t.Fatalf("expected=%s, aParseDef(mockArg.line)ctual=%s\n", expected, actual)
+		}
+	}
+}
+
 func TestMatchDef(t *testing.T) {
 	mockDefs := []Def{
 		{

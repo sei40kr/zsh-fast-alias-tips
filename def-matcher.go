@@ -1,6 +1,9 @@
 package main
 
 import (
+	"bufio"
+	"fmt"
+	"os"
 	"sort"
 	"strings"
 )
@@ -11,6 +14,38 @@ import (
 type Def struct {
 	alias string
 	abbr  string
+}
+
+func ParseDef(line string) Def {
+	alias := make([]rune, 0, 1024)
+	abbr := make([]rune, 0, 1024)
+
+	afterEscape := false
+	inQuote := false
+	inRightExp := false
+	for _, aRune := range line {
+		if aRune == '\\' {
+			afterEscape = !afterEscape
+
+			if afterEscape {
+				continue
+			}
+		}
+
+		if aRune == '\'' && !afterEscape {
+			inQuote = !inQuote
+		} else if aRune == '=' && !inQuote {
+			inRightExp = true
+		} else if !inRightExp {
+			alias = append(alias, aRune)
+		} else {
+			abbr = append(abbr, aRune)
+		}
+
+		afterEscape = false
+	}
+
+	return Def{alias: string(alias), abbr: string(abbr)}
 }
 
 func MatchDef(defs []Def, command string) string {
@@ -38,5 +73,18 @@ func MatchDef(defs []Def, command string) string {
 }
 
 func main() {
-	// TODO Implement this
+	if len(os.Args) != 2 {
+		fmt.Fprintln(os.Stderr, "Invalid number of arguments")
+		os.Exit(1)
+	}
+
+	defs := make([]Def, 0, 512)
+
+	scanner := bufio.NewScanner(bufio.NewReaderSize(os.Stdin, 1024))
+	for scanner.Scan() {
+		line := scanner.Text()
+		defs = append(defs, ParseDef(line))
+	}
+
+	fmt.Printf("%s\n", MatchDef(defs, os.Args[1]))
 }
