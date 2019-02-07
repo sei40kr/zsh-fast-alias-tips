@@ -74,27 +74,27 @@ func TestMatchDef(t *testing.T) {
 	mockArgs := []struct {
 		subject  string
 		command  string
-		expected string
+		expected *Def
 	}{
 		{
 			subject:  "when the command has single token",
 			command:  "docker",
-			expected: "dk",
+			expected: &Def{alias: "dk"},
 		},
 		{
 			subject:  "when the command has multiple tokens",
 			command:  "git branch",
-			expected: "gb",
+			expected: &Def{alias: "gb"},
 		},
 		{
 			subject:  "when it has more than 2 matches, then return the longest one",
 			command:  "git checkout -b",
-			expected: "gcb",
+			expected: &Def{alias: "gcb"},
 		},
 		{
 			subject:  "when it has no matches, then return a empty string",
 			command:  "cd ..",
-			expected: "",
+			expected: nil,
 		},
 	}
 
@@ -104,11 +104,16 @@ func TestMatchDef(t *testing.T) {
 		expected := mockArg.expected
 		actual := MatchDef(mockDefs, mockArg.command)
 
-		if actual.alias == expected {
+		if (actual == nil && expected == nil) || actual.alias == expected.alias {
 			fmt.Println("ok")
 		} else {
 			fmt.Println("ng")
-			t.Fatalf("expected=%s, actual=%s\n", expected, actual)
+
+			if actual != nil {
+				t.Fatalf("expected=%s, actual=%s\n", expected.alias, actual.alias)
+			} else {
+				t.Fatalf("expected=%s, actual=nil\n", expected.alias)
+			}
 		}
 	}
 }

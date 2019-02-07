@@ -50,26 +50,16 @@ func ParseDef(line string) Def {
 
 func MatchDef(defs []Def, command string) *Def {
 	sort.Slice(defs, func(i, j int) bool {
-		return strings.Compare(defs[i].abbr, defs[j].abbr) <= 0
+		return len(defs[j].abbr) <= len(defs[i].abbr)
 	})
 
-	ok := 0
-	ng := len(defs)
-	for 1 < ng-ok {
-		mid := (ok + ng) / 2
-
-		if 0 <= strings.Compare(command, defs[mid].abbr) {
-			ok = mid
-		} else {
-			ng = mid
+	for _, def := range defs {
+		if strings.HasPrefix(command, def.abbr) {
+			return &def
 		}
 	}
 
-	if strings.HasPrefix(command, defs[ok].abbr) {
-		return &defs[ok]
-	} else {
-		return nil
-	}
+	return nil
 }
 
 func main() {
