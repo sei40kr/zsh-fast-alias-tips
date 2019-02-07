@@ -1,0 +1,12 @@
+#+TITLE: zsh-fast-alias-tips
+
+A zsh plugin to help remembering those aliases you defined once.
+Ported from [[https://github.com/djui/alias-tips][djui/alias-tips]].
+
+* Install
+
+** Install with zplugin
+#+BEGIN_SRC sh
+zplugin ice make'!'
+zplugin light sei40kr/zsh-fast-alias-tips
+#+END_SRC
