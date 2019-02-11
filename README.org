@@ -6,15 +6,15 @@ Ported from [[https://github.com/djui/alias-tips][djui/alias-tips]].
 ** Example
    #+BEGIN_SRC
      $ docker
- 💡  dk
+     💡  dk
      ...
 
      $ git checkout
- 💡  gco
+     💡  gco
      ...
 
      $ git checkout master
- 💡  gcm
+     💡  gcm
      ...
    #+END_SRC
 
@@ -24,7 +24,7 @@ Ported from [[https://github.com/djui/alias-tips][djui/alias-tips]].
 * Install
 
 ** Install with zplugin
-#+BEGIN_SRC sh
-zplugin ice make'!'
-zplugin light sei40kr/zsh-fast-alias-tips
-#+END_SRC
+   #+BEGIN_SRC sh
+     zplugin ice make'!'
+     zplugin light sei40kr/zsh-fast-alias-tips
+   #+END_SRC
