@@ -69,6 +69,14 @@ func TestMatchDef(t *testing.T) {
 			alias: "gcb",
 			abbr:  "git checkout -b",
 		},
+		{
+			alias: "ls",
+			abbr:  "ls -G",
+		},
+		{
+			alias: "ll",
+			abbr:  "ls -lh",
+		},
 	}
 
 	mockArgs := []struct {
@@ -95,6 +103,11 @@ func TestMatchDef(t *testing.T) {
 			subject:  "when it has no matches, then return a empty string",
 			command:  "cd ..",
 			expected: nil,
+		},
+		{
+			subject:  "when it was expanded recursively from >1 aliases, then reduce it fully",
+			command:  "ls -G -lh", // ll expands to that with ls='ls -G' and ll='ls -lh' aliases defined
+			expected: &Def{alias: "ll"},
 		},
 	}
 

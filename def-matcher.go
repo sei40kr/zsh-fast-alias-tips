@@ -53,13 +53,34 @@ func MatchDef(defs []Def, command string) *Def {
 		return len(defs[j].abbr) <= len(defs[i].abbr)
 	})
 
-	for _, def := range defs {
-		if strings.HasPrefix(command, def.abbr) {
-			return &def
+	var candidate Def
+
+	for true {
+		var match Def
+		for _, def := range defs {
+
+			if command == def.abbr {
+				match = def
+				break
+			} else if strings.HasPrefix(command, def.abbr) {
+				match = def
+				break
+			}
+		}
+
+		if match != (Def{}) {
+			command = fmt.Sprintf("%s%s", match.alias, command[len(match.abbr):])
+			candidate = match
+		} else {
+			break
 		}
 	}
 
-	return nil
+	if candidate != (Def{}) {
+		return &candidate
+	} else {
+		return nil
+	}
 }
 
 func main() {
