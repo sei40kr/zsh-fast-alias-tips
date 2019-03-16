@@ -48,18 +48,41 @@ func ParseDef(line string) Def {
 	return Def{alias: string(alias), abbr: string(abbr)}
 }
 
-func MatchDef(defs []Def, command string) *Def {
+func MatchDef(defs []Def, command string) (*Def, bool) {
 	sort.Slice(defs, func(i, j int) bool {
 		return len(defs[j].abbr) <= len(defs[i].abbr)
 	})
 
-	for _, def := range defs {
-		if strings.HasPrefix(command, def.abbr) {
-			return &def
+	var candidate Def
+	isFullMatch := false
+
+	for true {
+		var match Def
+		for _, def := range defs {
+
+			if command == def.abbr {
+				match = def
+				isFullMatch = true
+				break
+			} else if strings.HasPrefix(command, def.abbr) {
+				match = def
+				break
+			}
+		}
+
+		if match != (Def{}) {
+			command = fmt.Sprintf("%s%s", match.alias, command[len(match.abbr):])
+			candidate = match
+		} else {
+			break
 		}
 	}
 
-	return nil
+	if candidate != (Def{}) {
+		return &candidate, isFullMatch
+	} else {
+		return nil, false
+	}
 }
 
 func main() {
@@ -77,8 +100,12 @@ func main() {
 	}
 
 	command := os.Args[1]
-	match := MatchDef(defs, command)
+	match, isFullMatch := MatchDef(defs, command)
 	if match != nil {
-		fmt.Printf("%s%s\n", match.alias, command[len(match.abbr):])
+		if isFullMatch {
+			fmt.Printf("%s\n", match.alias)
+		} else {
+			fmt.Printf("%s%s\n", match.alias, command[len(match.abbr):])
+		}
 	}
 }
