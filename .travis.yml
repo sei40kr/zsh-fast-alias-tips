@@ -24,5 +24,6 @@ deploy:
     secure: sx0Y3F70xS83iD3Tnuu+ZT12AYv2gL/gxYjRF+1iZGWpgXS75Ghj2+ymcO7K3lM7j5rye0LPKdgthZrT1vUVplQwWpRxVcTsq5nFRPv0B33wyDrnKpbcg28YC/pbb7dkNNBeHQGLRCP8C6R6hJBEpTOvvnmBO5yFn8Qe0YOw4s4bRivXExEcrpyc7WHmfLdCFNmkl161iF+t4hnUKufPYOotTGpXeEAA98YnXeeqg1KVhR0mbCex/wNlMEq2DI3oTsStxYxuk81w+1VtbNpCBrkCeFqJMGYxwa1yBW5xhNh57e+ubEomEKE+5mgCKcZJETwIqUE86E3gG/LNqMEcpx/WoHXg4c18011YLIiITHhsfixciy+BaJ/9GJ97Wy9vqncOP1hNFqI9lJcSjAD7Ln1BQjFU4fKcsoynQ9vXfxk4fHmPIM/kVNIbtdSVmPuCSPfSie4pOXTIbZ0Rnlka/Z2y/fJFPxeeafNUbJjCwh5hwl6RXoNBOZGpdbTnpL4LkO/PNuCkA+Q2oTLQMcOoAELKZzz0l4TqNkJy9T4VGKNbfzLXrm3mb7d7BjidVH/ZzZvmTu5ZVO6zb+OgaLJHHSb5vMSOBbtEO61B1V3HniTTNAMAGbcH6EhjdW0O3S3rVkE+7TSjavmyeYoNlKNBuJ/iSczjI7CHcYONYR/uT3Q=
   file_glob: true
   file: build/def-matcher_*
+  skip_cleanup: true
   on:
     repo: sei40kr/zsh-fast-alias-tips
