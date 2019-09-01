@@ -1,0 +1,28 @@
+language: go
+go:
+- 1.11.1
+
+branches:
+  only: master
+  git:
+    depth: 1
+
+before_install:
+- curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+
+install:
+- dep ensure
+
+script:
+- go test
+- go get github.com/mitchellh/gox
+- gox -os='linux darwin windows' -arch='amd64' -output='build/def-matcher_{{.OS}}_{{.Arch}}' -verbose
+
+deploy:
+  provider: releases
+  api_key:
+    secure: cqQvqud2pfJobq75gH6UP4FY4PRQvgFLXPeqEpEdvxz1x8N75zrmYm6l35IoJKAcjmQE56V8zn191CJktFS7H1lERU0CwLFASglXypbAalA4qi1wcX75IuL57LtWW1ORR4EdKkQyZsF27fIDbh+xzUm93Dex1o0ydiV/xJNbacg6OJrUxovG7Jz8I4jUsNJcSpLdeAJ4SswlzWEeJp9NLOGERlceT71gcp1q/PKalTa2TkGe73T5ERexl+WWq6COpzy8Fw55wMTt6AGw12ZhlQ1boryxpugjCg7pWTyeITxCdLnBlViWJZAz4Seql0dyuoIISoV3nkAq3IXlvBA0hw9JnDcvorG5cgdpYBWilSLTeRe5j3SrlbqlfDOzHSO5SMhpF10YtcRDnN+BqklfABI182mg4Txj6e4cjImAiz/2i0yNQe/VV2YK/8v9pynTE7PtZpuWb+IsGhu8QPw336wEDnpCKYqJD/DB7UW03JWK4QWqeQyZOAcxZjo9MCRFyguAEyK+wB4G6AeukBe4P3sHDA8xA+nNiEl5fs2KqZWbI0RA5eyETigGaLSaYRxDAbyXjNYPXqxO9YZ+kPjf7hgcm5B6V/F7cb7MxJKQlT1fXwjpjxOYLi1tefTF8SDKhDtzO5lIYlhPli3fcM89DgrvFTBbsUnAYczUcXC7VMk=
+  file_glob: true
+  file: build/def-matcher_*
+  on:
+    repo: sei40kr/zsh-fast-alias-tips
