@@ -1,8 +1,8 @@
 # fast-alias-tips.plugin.zsh
 # author: Seong Yong-ju <sei40kr@gmail.com>
 
-FAST_ALIAS_TIPS_PREFIX="💡 $(tput bold)"
-FAST_ALIAS_TIPS_SUFFIX="$(tput sgr0)"
+: ${FAST_ALIAS_TIPS_PREFIX:="💡 $(tput bold)"}
+: ${FAST_ALIAS_TIPS_SUFFIX:="$(tput sgr0)"}
 
 if [[ ! -L "${0:a}" ]]; then
     __fast_alias_tips_dir="${0:a:h}"
