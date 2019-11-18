@@ -26,6 +26,7 @@ $ git checkout master
 ### Install with zplugin
 
 ```sh
-zplugin ice make'!'
+zplugin ice from'gh-r' as'program'
+zplugin light sei40kr/fast-alias-tips-bin
 zplugin light sei40kr/zsh-fast-alias-tips
 ```
