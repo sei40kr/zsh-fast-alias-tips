@@ -30,3 +30,10 @@ zplugin ice from'gh-r' as'program'
 zplugin light sei40kr/fast-alias-tips-bin
 zplugin light sei40kr/zsh-fast-alias-tips
 ```
+
+## Customization
+
+| Variable                 | Default value       | Description             |
+| :--                      | :--                 | :--                     |
+| `FAST_ALIAS_TIPS_PREFIX` | `"💡 $(tput bold)"` | Prefix of the alias tip |
+| `FAST_ALIAS_TIPS_SUFFIX` | `"$(tput sgr0)"`    | Suffix of the alias tip |
