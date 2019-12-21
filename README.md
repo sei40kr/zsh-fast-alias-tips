@@ -1,7 +1,5 @@
 # zsh-fast-alias-tips
 
-[![CircleCI](https://circleci.com/gh/sei40kr/zsh-fast-alias-tips.svg?style=svg)](https://circleci.com/gh/sei40kr/zsh-fast-alias-tips)
-
 A zsh plugin to help remembering those aliases you defined once.
 Ported from [djui/alias-tips](https://github.com/djui/alias-tips).
 
