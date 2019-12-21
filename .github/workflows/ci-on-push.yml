@@ -32,4 +32,6 @@ jobs:
           dep ensure
 
       - name: 'Run GoReleaser'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GORELEASER_GITHUB_TOKEN }}
         uses: goreleaser/goreleaser-action@v1
