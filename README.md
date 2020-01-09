@@ -1,6 +1,6 @@
 # zsh-fast-alias-tips
 
-A zsh plugin to help you remembering the aliases you defined once.
+Helps you remembering the aliases you defined once.
 
 Written in zsh and Go. Ported from [djui/alias-tips](https://github.com/djui/alias-tips).
 
