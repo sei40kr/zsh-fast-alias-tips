@@ -13,6 +13,13 @@ jobs:
         with:
           fetch-depth: 1
 
+      - uses: actions/cache@v1
+        with:
+          path: ${{ env.GOPATH }}/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
       - name: 'Run GoReleaser'
         env:
           GITHUB_TOKEN: ${{ secrets.GORELEASER_GITHUB_TOKEN }}
