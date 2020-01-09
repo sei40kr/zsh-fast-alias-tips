@@ -13,24 +13,6 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: 'Create a symlink to the workspace in GOPATH'
-        run: |
-          mkdir -p "$(dirname "${GOPATH}/src/github.com/${GITHUB_REPOSITORY}")"
-          ln -fsT "$GITHUB_WORKSPACE" "${GOPATH}/src/github.com/${GITHUB_REPOSITORY}"
-
-      - id: cache
-        uses: actions/cache@v1
-        with:
-          path: vendor
-          key: vendor-${{ hashFiles('Gopkg.toml') }}
-
-      - name: 'Install dependencies'
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: |
-          curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-          cd "${GOPATH}/src/github.com/${GITHUB_REPOSITORY}"
-          dep ensure
-
       - name: 'Run GoReleaser'
         env:
           GITHUB_TOKEN: ${{ secrets.GORELEASER_GITHUB_TOKEN }}
