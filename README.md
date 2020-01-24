@@ -19,12 +19,12 @@ nothing to commit, working tree clean
 
 ## Install
 
-### Install with [zplugin](https://github.com/zdharma/zplugin) (recommended)
+### Install with [zinit](https://github.com/zdharma/zinit) (recommended)
 
 ```sh
-zplugin ice from'gh-r' as'program'
-zplugin light sei40kr/fast-alias-tips-bin
-zplugin light sei40kr/zsh-fast-alias-tips
+zinit ice from'gh-r' as'program'
+zinit light sei40kr/fast-alias-tips-bin
+zinit light sei40kr/zsh-fast-alias-tips
 ```
 
 ### Install with [zplug](https://github.com/zplug/zplug)
