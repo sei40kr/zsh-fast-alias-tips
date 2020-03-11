@@ -11,6 +11,10 @@ __fast_alias_tips_preexec() {
     local first="$(cut -d' ' -f1 <<<"$cmd")"
 
     local suggested="$(alias | "def-matcher" "$cmd_expanded")"
+    if [[ "$suggested" == '' ]]; then
+        return
+    fi
+    
     if [[ ${#suggested} -gt ${#first} ]]; then
         return
     fi
