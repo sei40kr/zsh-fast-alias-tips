@@ -14,13 +14,13 @@ __fast_alias_tips_preexec() {
     if [[ "$suggested" == '' ]]; then
         return
     fi
-    
-    if [[ ${#suggested} -gt ${#first} ]]; then
-        return
-    fi
 
     local suggested_first="$(cut -d' ' -f1 <<<"$suggested")"
     if [[ "$suggested_first" == "$first" ]]; then
+        return
+    fi
+    
+    if [[ ${#suggested} -gt ${#cmd} ]]; then
         return
     fi
 
