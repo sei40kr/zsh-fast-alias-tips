@@ -28,12 +28,5 @@ func main() {
 	}
 
 	command := os.Args[1]
-	match, isFullMatch := matcher.Match(defs, command)
-	if match != nil {
-		if isFullMatch {
-			fmt.Printf("%s\n", match.Name)
-		} else {
-			fmt.Printf("%s%s\n", match.Name, command[len(match.Abbr):])
-		}
-	}
+	fmt.Println(matcher.Match(defs, command))
 }
