@@ -20,7 +20,7 @@ func Match(defs []model.AliasDef, command string) string {
 			if command == def.Abbr {
 				match = def
 				break
-			} else if strings.HasPrefix(command, def.Abbr) {
+			} else if strings.HasPrefix(command, def.Abbr+" ") {
 				match = def
 				break
 			}

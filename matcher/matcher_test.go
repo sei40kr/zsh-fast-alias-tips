@@ -14,11 +14,17 @@ var mockAliasDefs = []model.AliasDef{
 	{Name: "gcb", Abbr: "git checkout -b"},
 	{Name: "ls", Abbr: "ls -G"},
 	{Name: "ll", Abbr: "ls -lh"},
+	{Name: "yst", Abbr: "yarn start"},
 }
 
 func TestMatch_NoMatches(t *testing.T) {
 	aliasTips := Match(mockAliasDefs, "cd ..")
 	assert.Equal(t, aliasTips, "cd ..")
+}
+
+func TestMatch_NoMatches2(t *testing.T) {
+	aliasTips := Match(mockAliasDefs, "yarn start :ja")
+	assert.Equal(t, aliasTips, "yarn start:ja")
 }
 
 func TestMatch_SingleToken(t *testing.T) {
