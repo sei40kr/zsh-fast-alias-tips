@@ -2,7 +2,7 @@
 
 Helps you remembering the aliases you defined once.
 
-Written in zsh and Go. Ported from [djui/alias-tips](https://github.com/djui/alias-tips).
+Written in zsh and Rust. Ported from [djui/alias-tips](https://github.com/djui/alias-tips).
 
 ## Example
 
@@ -19,20 +19,19 @@ nothing to commit, working tree clean
 
 ## Install
 
-### Install with [zinit](https://github.com/zdharma/zinit) (recommended)
+### Requirements
+
+- Rust (cargo)
+- zsh
+
+### Install with [zinit](https://github.com/zdharma/zinit)
 
 ```sh
-zinit ice from'gh-r' as'program'
-zinit light sei40kr/fast-alias-tips-bin
+zinit ice atclone'cargo build --release' atpull'%atclone'
 zinit light sei40kr/zsh-fast-alias-tips
 ```
 
-### Install with [zplug](https://github.com/zplug/zplug)
-
-```sh
-zplug sei40kr/fast-alias-tips-bin, from:gh-r, as:command, rename-to:def-matcher
-zplug sei40kr/zsh-fast-alias-tips
-```
+The plugin will automatically build the `alias-matcher` binary during installation and updates.
 
 ## Customization
 
